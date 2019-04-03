@@ -1,36 +1,36 @@
  
 # my Retirement calculator in JQuery and Bootstrap
 
-I decided to create a modern, easy to use and practical on-line retirement calculator, and I open-sourced it too!  There are ton's of these available all over the internet, but none really quite had enough details or the details I wanted to make them useful.  So I approached this  retirement calculator from the FIRE ( Financially Independent Retire Early) perspective , where you're goal is to save as much as possible , then after a certain number of years, you can retire and live off your savings and investments.  I tried to take into account all the major factors affecting your earning and retirement years, incomes, savings, retirement, kids, housing, healthcare, taxes , inflation etc..
+I decided to create a modern, easy to use and practical on-line retirement calculator, and I open-sourced it too!  This  retirement calculator comes from the FIRE ( Financially Independent Retire Early) perspective , where you're goal is to save as much as possible , then after a certain number of years, you can retire and live off your savings and investments.  I tried to take into account all the major factors affecting your earning and retirement years, incomes, savings, retirement, kids, housing, healthcare, taxes , inflation etc..
 
-
-Complete dettailed description here: http://www.abrandao.com/2019/04/retirement-calculator/
+Complete detailed description here: http://www.abrandao.com/2019/04/retirement-calculator/
 
 
 ## Getting Started
 
 Clone this repo .. or just download the source code to the index.html file. All the calculation logic is located there.. 
 
-  * this repository, mainly the *index.html* file 
- 
+  * this repository, mainly the **index.html** file 
+  * knowledge of HTML5, very basic understanding Jquery and some understanding of Bootstrap CSS/HTML
 
 ## Dependencies 
 
-This is a single web-page calculator with minimal dependencies. All the depedencies are supplied via links to CDN . 
+This is a single web-page calculator with minimal dependencies. All the calculation code is contained in the index.html file.
+All the depedencies are supplied via links to CDN . 
 The following links are required
   * [BootStrap](https://getbootstrap.com/) · The most popular HTML, CSS, and JS library in the world . 
   * [Jquery](https://jquery.com/). jQuery is a fast, small, and feature-rich JavaScript library. 
   * [Chart.js](https://www.chartjs.org/) Simple yet flexible JavaScript charting for designers & developers
 
 Inside the <head> tag
-```	
+```javascript
  <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 ```
 
 Then the corresponding JQuery and ChartJS links 
 
-```
+```javascript
 
  <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -40,6 +40,8 @@ Then the corresponding JQuery and ChartJS links
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 ```
 
+You can of course download the dependencie files and modify the above src links to point all to your local folders.
+
 ### Installing
 
 Just clone this repository and open *index.html* in your web browser. For off line use , modify the src for dependencies listed above.
@@ -48,8 +50,7 @@ Just clone this repository and open *index.html* in your web browser. For off li
 
 
 Essentially all your Income and SAVINGS are added up during the years, your working (working income) , and savings+retirement accounts  + other income over the course of your lifetime. Then these various forms of income are calculated against entered  Annual Percentage Yield to give your annual compound interest growth.  Here’s a sample of the calculation code for this section:
-
-```
+```javascript
 for (i = 1 ; i < years+1; i++) { 
   var ai = {} ;  //define a Income blank object
     var exp={} ; //define an Expense object
@@ -74,7 +75,7 @@ for (i = 1 ; i < years+1; i++) {
 
 Once we have all that information we  calculate your INCOME – EXPENSES we get a yearly surplus (or deficit), which we will apply to your SAVINGS, hopefully and this is the premise of this calculator.  You can work just long enough to grow your SAVINGS to the point where you can retire and only need to take a small percentage and live off that.  Sample Code:
 
-```
+```javascript
 // Now calculate SURPLUS OR DEFICIT for the year
   var diff=(incomes[i-1].total_annual_income.toFixed(2) - expenses[i-1].total_annual_expenses.toFixed(2) );
   // any money left over place in savings for that year.
@@ -83,7 +84,7 @@ Once we have all that information we  calculate your INCOME – EXPENSES we get 
 ```
 
 Finally we calculate what you’re withdrawal  rate is and how it will affect your savings over time after your retire. . The conventional wisdom of 4% withdrawal works out pretty well and is the default withdrawal rate. Adjusting this withdrawal rate. and the number of years you are working will have some of the largest impact as to what you can take out in retirement. Because you’ll have a larger nest egg at the beginning , your withdrawal percentage will likely yield a larger income than in your later years , which is why I display two retirement income values. Here’s a sample:
-```
+```javascript
 //Now calculate how much to withdraw from savings and retirement accounts AFTER we're RETIRED
  if (i > work_years) //now we're withdrawing
      {
@@ -106,12 +107,23 @@ Finally we calculate what you’re withdrawal  rate is and how it will affect yo
 
 There are a few one-time events, such as inheritance or sale (of a primary residence or business) which you choose how much and at what time point it occurs. Also Social Security you decide when to take it. If you have a pension , annual pension disbursements begin when social security begins.  Code for inheritance looks like this.
 
-``` ai.one_time=(ai.age==inheritance_age) ? parseInt( $("#income_inheritance").val() ) : 0 ;```
+```javascript
+ai.one_time=(ai.age==inheritance_age) ? parseInt( $("#income_inheritance").val() ) : 0 ;
+```
+## Verifying values and calculation code
+
+Right now I simply send to the console.log a year-by-year summary of the income and expense javascript objects, you can use this to debug in your browser by pressing **F12** developer mode. and see something like.
+
+'''
+ {"i":30,"tax_bracket":0.37,"income_tax":-1741.82,"healthcare":4358,"housing":0,"property_tax":2000,"dependants":0,"food":4500,"utilities":2060,"transport":9500,"optional":0,"inflation_rate":0.015,"total_annual_expenses":20986.3227,"inflation_costs":314.7948405}
+ Annual Income: -4707.63 -  20986.32 Expenses  =   -25693.95
+{"i":31,"tax_bracket":0.37,"income_tax":-1892.8,"healthcare":4358,"housing":0,"property_tax":2000,"dependants":0,"food":4500,"utilities":2060,"transport":9500,"optional":0,"inflation_rate":0.015,"total_annual_expenses":20833.078,"inflation_costs":312.49617}
+ Annual Income: -5115.69 -  20833.08 Expenses  =   -25948.77
+ '''
 
 ## Installing and Testing 
 
-  *   Download and open *index.html* in your web browser.
-
+  *   Download and open **index.html** in your web browser.
 
 ## Contributing
 
