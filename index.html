@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>myRetirment  Calculator</title>
+  <meta name="description" content="my Retirment Savings Calculator">
+  <meta name="author" content="www.abrandao.com">
+   <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+    <!-- Bootstrap 3.xx CSS  -->
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+
+<body >
+ <div class="container">
+  <div class="text-center">
+   <img src="images/fire_toon400x400.png" width="110"  class="pull-left img-responsive" style="padding:5px;"  />
+  <h2><b>my</b>Retirement Calculator </h2>
+	<p>
+	Here's myRetirement Early Calculator. That will help perform a simplified but complete
+	 back-of-the-envelope Financialy Independence Retire Early  calculation to see if and when you can implement your FIRE strategies. 
+	  
+	</p>
+   </div>  
+ 
+<!-- Start of Retirment Calculator FORM  -->
+<form  id="FireCalcForm">
+
+<div class="panel panel-default">
+  <div class="panel-heading">General Retirement Assumptions 
+
+	
+	</div>
+  <div class="panel-body">
+
+  <div class="row">
+    <div class="col-sm-2">
+		<div class="form-group">
+		<label for="myinput">Your Age</label>
+		<input type="number" class="form-control" id="age" value="30" placeholder="Age in Years">
+		</div>
+    </div> 
+    <div class="col-sm-2">
+		<div class="form-group">
+		<label for="myinput">Life Expectancy</label>
+		<input type="number" class="form-control" id="lifeExpect"  value="90" placeholder="Age in Years">
+		</div>
+		</div>
+		<div class="col-sm-2">
+		<label for="myinput">Family (dependants)</label>
+				<select class="form-control" id="expense_kids">
+					<option selected>Choose...</option>
+					<option value="0" selected>Single</option>
+					<option value="0" >Married</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+				  <small>used to figure costs to support children/dependants for a period. </small>
+			</div>
+
+
+   	<div class="col-sm-3">
+			<div class="form-group">
+			<label for="myinput">I want to Retire in (years) at Age <span id="retire_age"> </span> </label>
+			<input type="number" id="work_years" class="form-control" placeholder="Years left to work"  value="10" min="0" max="100" onInput="work_years_slider.value=work_years.value" />
+			<input type="range" id="work_years_slider" class="form-control-range" value="10" min="0" max="100" onInput="work_years.value=work_years_slider.value" />
+			 
+			<small> Number of Years more that you want to make your full income.</small>
+			</div>
+		</div>
+			<div class="col-sm-3">  
+			<div class="form-group">
+			<label for="myinput">Retired Withdrawal Rate </label>
+			<input type="number" class="form-control" id="withdrawlRate" value="4.0" placeholder="% Average return "> %
+			<small> Percentage of your all Savings + Retirement accounts to withdraw anually</small>
+			</div>
+			</div>
+  </div>
+    	<div class="row">
+    
+    <div class="col-sm-4">  
+				<div class="form-group">
+			 <h3>  <label for="myinput" id="yearsRemain">...</label> Years Remain  </h3> 
+		 
+			 <p>Your life expectancy used to calculate how long to  make your money last.
+		    <h3>At <label  id="retirement_withdrawl_rate">...</label> withdrawl rate, when your're first retired, you can  expect to generate <label  id="retirement_income_start">...</label> annually, and this will change to <label  id="retirement_income_end">...</label> per year, towards the end. Projected nest-egg at the end of your life  <label  id="retirement_savings_end">...</label> </h3>  calculated from your savings and retirment investments. Note substantial inheritance/sales,interest rates, and raising children will all have impacts. Please  virtually impossibel to model exact details as much of your input is projections as
+		TAX and ECONOMIC conditions are complex and change over time.  
+		In a nutshell let this be a broad gauge to see if FIRE may work for your </p>
+	
+			</div>
+	 </div>
+ 
+	 <div class="col-sm-8">  
+	 		<canvas id="myChart"  style="min-width: 310px; height: 400px; margin: 0 auto"></canvas>
+		</div>
+
+
+  </div> <!-- row -->
+
+  </div> <!--end panel body -->
+</div> <!-- end panel -->
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">Income + Savings (all Household  in USD )</div>
+  <div class="panel-body">
+
+  <div class="row">
+    <div class="col-sm-3">
+		<div class="form-group">
+		<label for="myinput">Annual Household Incomes  $</label>
+		<input type="number" class="form-control" id="income" value="60000" placeholder="NET Annual income in $">
+		<small> (Household Gross income - before taxes) </small>
+		</div>
+	</div>
+    <div class="col-sm-3">  
+		<div class="form-group">
+		<label for="myinput">% Income Saved</label>
+		<input type="number" class="form-control" id="income_savings_rate" value="20.0" placeholder="% Savings of NET income">
+		<small> How much of full-time income are you stashing into savings </small>
+		</div>
+		</div>
+     <div class="col-sm-6">	
+     <h4>
+      Income saved $<label for="myinput" id="income_saved">...</label>  per year
+    </h4> 	<small> Total annual household income from primary job </small> </div>
+
+  </div> <!-- row -->
+
+    <div class="row">
+    <div class="col-sm-3">
+		<div class="form-group">
+		<label for="myinput"> Initial Savings & Investments  $</label>
+		<input type="number" class="form-control" id="savings" value="0" placeholder="Current Savings">
+		<small> Includes Checking, CD,Savings, Stocks , Bonds, Gold </small>
+		
+		</div>
+	</div>
+    <div class="col-sm-3">  
+		<div class="form-group">
+		<label for="myinput">Savings APY (Avg.)</label>
+		<input type="number" class="form-control" id="savings_apy" value="2.0" placeholder="% average Savings">
+		</div>
+		</div>
+     <div class="col-sm-6">	  <h4>
+      Interest income  $<label for="myinput" id="savings_interest_income">...</label>  per year
+    </h4> 	<small> You're total amount of Saving interest income based on basic calculation </small>  </div>
+  </div> <!-- row -->
+
+
+  	 <div class="row">
+    <div class="col-sm-3">
+		<div class="form-group">
+		<label for="myinput">Initial Retirement Accounts $</label>
+		<input type="number" class="form-control" id="retirement" value="0.00" placeholder="Current Retriment">
+		<small> Includes 401k, IRA , SEP  etc. </small>
+		
+		</div>
+	</div>
+    <div class="col-sm-3">  
+		<div class="form-group">
+		<label for="myinput">Retirment  APY (Avg.)</label>
+		<input type="number" class="form-control" id="retirement_apy" value="5" placeholder="% Expected rate of return ">
+		</div>
+		</div>
+
+
+  
+<div class="col-sm-4">	  <h4>
+      Retirement income $<label for="myinput" id="retirement_interest_income">...</label>  per year
+    </h4> 	<small> You're total amount of Retirement and  interest income based on APY rage </small>  </div>
+
+  </div> <!-- row -->
+
+   <div class="row">
+    <div class="col-sm-3">
+		<div class="form-group">
+		<label for="myinput">Inheritance / Sale (one time)</label>
+		<input type="number" class="form-control" id="income_inheritance" value="0" placeholder="Inheritance lump sum">
+		<small> Income from a one-time lump sum inheritance / home sale / business sale </small>
+		</div>
+	</div>
+
+	<div class="col-sm-2">  
+			<div class="form-group-sm">
+			<label for="myinput">Age Received</label>
+			<input type="number" class="form-control" id="income_inheritance_age" value="60" placeholder="Age Inheritance Sale Recieved ">
+			<small> Your age when Inheritance or sale occured </small>
+			</div>
+			</div>
+    <div class="col-sm-2">  
+		<div class="form-group">
+		<label for="myinput">Rentals/Business Income</label>
+		<input type="number" class="form-control" id="income_realestate_rentals" value="0" placeholder="% Average return ">
+		<small> recurring income from rental properties, or from business operations you own.</small>
+		</div>
+		</div>
+     <div class="col-sm-3">
+     		 <h4>
+      Rental income $<label for="myinput" id="income_realestate_rentals_income">...</label>  per year
+    </h4>   	<p>  Total amount  real estate income or business income </p> </div>
+  </div> <!-- row -->
+
+<div class="row">
+    <div class="col-sm-3">
+		<div class="form-group">
+		<label for="myinput">Annual Pensions</label>
+		<input type="number" class="form-control" id="income_pension" value="0" placeholder="Annual Pension income">
+        <small> Pension  Income, for calculations will be considered when you reach SSN eligiibility age.</small>
+		</div>
+	</div>
+    <div class="col-sm-3">  
+		<div class="form-group">
+		<label for="myinput">Annual Misc Income</label>
+		<input type="number" class="form-control" id="income_misc" value="0" placeholder="Annual Misc income">
+		<small> Miscellaneous Income, such as your side hustles, gig work (uber, AirBNB),freelance projects, etc. </small>
+		</div>
+		</div>
+     <div class="col-sm-3">	
+     		<div class="form-group">
+		<label for="myinput">Social Security Annual</label>
+		<input type="number" class="form-control" id="income_ss" value="16141" placeholder="Annual  Social security">
+		<small> What you're projected Social Security payout will be when you are eligible </small>
+		
+		</div>
+      </div>
+
+		<div class="col-sm-2">	
+      	<div class="form-group-sm">
+		<input class="form-check-input" type="checkbox" value="1" id="ss_eligible" checked>
+		<label class="form-check-label" for="defaultCheck1">
+		Eligible age SS / Pension</label>  
+
+		<input type="number" class="form-control" id="age_ssn_eligible" value="67" placeholder="Age I will take SS"> 
+		<small>Age when you expect to receive social security /Pension (Applies to US) </small>
+		</div>
+	</div>
+  </div> <!-- row -->
+
+
+  </div> <!--end panel body -->
+</div> <!-- end panel -->
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">Expenses (All Household)</div>
+	<div class="panel-body">
+
+
+			<div class="row">
+			<div class="col-sm-4">  
+					<div class="form-group">
+					<label for="myinput">Income Taxes Annual</label>
+					<input type="number" class="form-control" id="expense_tax_income" value="0" placeholder="Income Taxes ">
+					<small> Annual Income Taxes calculated Each year based on that year's income. Above is final year. Click (Soucre: <a href='https://www.nerdwallet.com/blog/taxes/federal-income-tax-brackets/'>USA Tax Bracket </a></small>
+					<div class="btn-group-sm" role="group" aria-label="Basic example">
+							<button type="button" class="btn btn-secondary">10%</button>
+							<button type="button" class="btn btn-secondary">12%</button>
+							<button type="button" class="btn btn-secondary">22%</button>
+							<button type="button" class="btn btn-secondary">24%</button>
+							<button type="button" class="btn btn-secondary">32%</button>
+							<button type="button" class="btn btn-secondary">35%</button>
+							<button type="button" class="btn btn-secondary">37%</button>
+
+						</div>
+					</div>
+					</div>
+
+				
+				<div class="col-sm-4">
+						<div class="form-group">
+						<label for="myinput">Healthcare ( Household) </label>
+						<input type="number" class="form-control" id="expense_healthcare" value="4358" placeholder="Healthcare costs">
+						<small>HealthCare Insurance, Out of Pocket, Medical expenses (Source:<a href='https://www.cnbc.com/2017/06/23/heres-how-much-the-average-american-spends-on-health-care.html'>CNBC</a>  )</small>
+						</div>
+					</div>	
+
+				<div class="col-sm-4">
+						<div class="form-group">
+						<label for="myinput">Annual Inflation rate (CPI) </label>
+						<input type="number" class="form-control" id="expense_inflation_rate" value="1.5" placeholder="Projected Inflation rate">
+						<small>Average Rate based on  Consumer Price Index , applies to most expenses (Source:<a href='https://www.bls.gov/cpi/data.htm'>US BLS CPI</a>  )</small>
+						</div>
+					</div>			
+			
+			</div> <!-- row -->
+
+	<div class="row">
+			<div class="col-sm-3">
+			<div class="form-group">
+			<label for="myinput">Housing Costs Annual</label>
+			<input type="number" class="form-control" id="expense_house" value="18000" placeholder="Mortage or Rent">
+			<small> Housing costs mortgage or rent for primary residence (Exclude taxes) </small>
+			</div>
+		</div>
+			<div class="col-sm-3">  
+			<div class="form-group">
+			<label for="myinput">Housing Note - Term (Years)</label>
+			<input type="number" class="form-control" id="expense_house_term" value="15" placeholder="Years left on mortgage">
+			<small> Applies mostly to homeowners with  mortgages; how many years till paid in full, Renters continue to pay rent lifetime </small>
+		</div>
+			</div>
+		
+			<div class="col-sm-3">
+				<div class="form-group">
+				<label for="myinput">Perpetual Housing Costs  Annual</label>
+				<input type="number" class="form-control" id="expense_house_tax" value="2000" placeholder="Housing propety tax">
+				<small> Housing Property Taxes,  insurance ,maintenancefor  renters this typically included in rent,enter 0 </small>
+				</div>
+			</div>
+
+
+			
+			</div>	 <!-- row -->
+
+			<div class="row">
+			
+				<div class="col-sm-5">  
+				<div class="form-group">
+				<label for="myinput"><span id="expense_kids_count" class="kiddies"> </span> dependants , will live with you for: </label>
+				<input type="number" class="form-control" id="expense_kids_term" value="17" placeholder="Dependant Years"> years
+				<small> Length of time dependants will be supported by you. For different ages use average of remaining years.</small>
+				</div>
+				</div>
+			
+				<div class="col-sm-6">
+						<h4>
+								Cost of raising <label for="myinput" id="expense_kids_count" class="kiddies">...</label> dependants 
+								is about  $<label for="myinput" id="expense_kids_total">...</label> 
+						 </h4>   	<small>  Cost of raising kids, or supporting family / friends. (Source:<a href=' http://money.com/money/4629700/child-raising-cost-department-of-agriculture-report/'> each child  typically  ~$13k/year </a> ) </small>
+					
+					</div>
+			
+		</div> <!-- row -->
+
+		<div class="row">
+		
+		
+			<div class="col-sm-3">
+			<div class="form-group">
+			<label for="myinput">Food Annual</label>
+			<input type="number" class="form-control" id="expense_food" value="4500" placeholder="Cost of Food for a year">
+			<small> Cost of food for a year for household (<a href="https://www.cnpp.usda.gov/USDAFoodPlansCostofFood/reports">Source: USDA </a>)</small>
+			</div>
+		</div>
+			<div class="col-sm-3">  
+			<div class="form-group">
+			<label for="myinput">Utilities </label>
+			<!-- https://www.energystar.gov/products/where_does_my_money_go -->
+			<input type="number" class="form-control" id="expense_utilities" value="2060" placeholder="Cost of Utilities ">
+			<small> Cost of heat, a/c,gas, electricity, internet, cell phone (Source:<a href='https://www.energystar.gov/products/where_does_my_money_go'>EnergyStar</a> ) </small>
+			</div>
+			</div>
+		
+			<div class="col-sm-3">  
+				<div class="form-group">
+				<label for="myinput">Transportation </label>
+				<!-- https://20somethingfinance.com/transportation-costs/ -->
+				<input type="number" class="form-control" id="expense_transport" value="9500" placeholder="Transportation costs ">
+				<small> Cost of auto lease, maintenance, auto insurance, gasoline, Uber (Source: <a href='https://beta.bls.gov/labs/'>US BLS </a>) </small>
+				</div>
+				</div>
+
+		<div class="col-sm-3">
+				<div class="form-group">
+				<label for="myinput">Annual Discretionary</label>
+				<input type="number" class="form-control" id="expense_misc" value="0" placeholder="Cost of Vacation">
+				<small> Cost of Vacations,Travel,Entertainment, large purchases etc. </small>
+				</div>			
+		</div>
+		
+		</div> <!-- row -->
+
+	</div>  <!-- end panel body-->
+	<div class="panel-footer">Annual Expenses Total:</div>
+</div>
+ 
+
+<div class="panel panel-default">
+  <div class="panel-heading">Calculate and SAVE </div>
+  <div class="panel-body">
+ <button class="btn btn-primary" type="button">Calculate</button>
+    <button class="btn btn-primary" type="button" onClick="SaveForm(); console.log('Form Saved') " >SAVE Locally</button>
+    <button class="btn  btn-primary" type="reset" onClick="localStorage.clear(); console.log('localstorage Cleared') " > Reset Defaults </button>
+
+  </div>
+</div>
+ 
+</form>
+<!-- End of FIRE FORM -->
+<hr>
+<small>This is open source, and for any other folks interested  out there I have linked this source code on GitHub, if you wish to modify the basic assumptions or just mess with this calculator.</small> </p>
+</div> <!-- container -->
+
+
+<!-- Supporting Javascript Libraries like Jquery etc. -->  
+
+ <!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <!-- then Bootstrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Charting ChartJS.com from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+
+<!-- Begin calculation Code Logic -->
+
+<script>
+	//Script-wide variables	
+	var incomes = []; //array will hold all income objects 
+	var expenses = []; //array will hold all expense objects
+
+//arrays hold chart formatted data
+	var chart_income=[];
+	var chart_expenses=[];
+	var chart_savings=[];   
+	var labels_years=[]; 
+
+	var tax_bracket_pct=0;
+
+/**
+ * Simple income_tax_bracket(income)
+ * 
+ */
+function income_tax_bracket(val )
+{
+  if (0 < val && val  < 19400  )
+		tax_bracket_pct=0.10
+else if ( 19401 < val && val  < 78950 )
+	tax_bracket_pct=0.12
+else if ( 78951 < val && val  < 168400 )
+	tax_bracket_pct=0.22
+else if ( 168401< val && val  < 321450 )
+	tax_bracket_pct=0.24
+else if ( 321451 < val && val  < 408200 )
+	tax_bracket_pct=0.32
+else if ( 408201 < val && val  < 612350 )
+	tax_bracket_pct=0.35
+else
+	tax_bracket_pct=0.37;
+
+   return  tax_bracket_pct;  //return the fax amount
+}	
+
+/**
+ * Number.prototype.format(n, x)
+ * 
+ * @param integer n: length of decimal
+ * @param integer x: length of sections
+ */
+function formatUSD(val)
+{
+	return "$"+(val).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');  // 12,345.67
+};
+
+
+/** reloadSaved()  reloads saved form data if any exists */
+function reloadSaved() {
+
+	$.each( $('form input'), function() {
+			input_name = $(this).attr('id');
+			if (localStorage[input_name])
+			 {
+			$(this).val(localStorage[input_name]);
+			console.log("Restoring: "+input_name +" with "+localStorage[input_name]  ) ;
+			}
+	});
+
+   
+    }
+   
+/** SaveForm()  saves ALL form data into LocalStorage */
+function SaveForm() {
+
+	$.each( $('#FireCalcForm :input'), function() {
+		input_name = $(this).attr('id');
+	    localStorage[input_name ] = $(this).val();
+	  //  console.log("Saving: "+input_name +" = "+ $(this).val() ) ;
+			
+	});
+
+    }
+
+/** Start of JQuery document.load function */
+$( document ).ready(function() {
+
+  reloadSaved(); //Reload LocalStorage Form elements - if exsits
+  Calculate();  // Recalculate 
+
+// Bind all form-control changes to trigger the Calculate event
+$("#work_years_slider").change(function() {
+      Calculate();   //Re-Calcualte the Model
+});
+
+$('.form-control').bind("change", function(){
+   Calculate();   //Re-Calcualte the Model
+});
+
+});
+
+
+/** main Calculate function */
+function Calculate()
+{
+//Calculate years remaing
+var currentAge= $("#age").val()-1 ;
+var years=  $("#lifeExpect").val() - currentAge  ;
+var retire_age =  parseInt( currentAge ) + parseInt( $("#work_years").val()  ) + 1 ;
+ $("#yearsRemain").text(years);
+ $("#work_years_slider").attr('max', years) ;  //set the Retire age max to remaining lifetime
+ $("#retire_age").text( retire_age );
+ 
+ //Housing Costs Term 
+// $("#expense_house_term").val(years);
+
+
+ //Income 
+ var income_saved=  $("#income").val() *  $("#income_savings_rate").val() /100 ;
+ $("#income_saved").text(income_saved);
+
+var savings_interest_income=  $("#savings").val() *  $("#savings_apy").val() /100 ;
+ $("#savings_interest_income").text(savings_interest_income);
+
+
+var retirement_interest_income=  $("#retirement").val() *  $("#retirement_apy").val() /100 ;
+ $("#retirement_interest_income").text(retirement_interest_income);
+
+var retirement_interest_income=  $("#retirement").val() *  $("#retirement_apy").val() /100 ;
+ $("#retirement_interest_income").text(retirement_interest_income);
+
+var  income_realestate_rentals_income= $("#income_realestate_rentals").val() ;
+ $("#income_realestate_rentals_income").text(income_realestate_rentals_income);
+ 
+ //Expenses:
+ var expense_kids_assumption = 13741; //annual cost to raise a child
+ //source: http://money.com/money/4629700/child-raising-cost-department-of-agriculture-report/
+ var  expense_kids_total= $("#expense_kids").val() * $("#expense_kids_term").val() * expense_kids_assumption ;
+ $("#expense_kids_total").text(  formatUSD(expense_kids_total) );
+ $(".kiddies").text( $("#expense_kids").val() )
+
+ 
+  //Model Let's begin creating a year by YEARLY array of incomes and expenses
+
+  var i;
+
+var work_years=$("#work_years").val(); //how many more years to work - receive full income
+var ssn_year_eligible=$("#age_ssn_eligible").val(); // what year start receiving social security
+var inheritance_age=$("#income_inheritance_age").val(); // age when you project to get one time inheritance.
+incomes= []; //reset the incomes array for new 
+expenses= []; //reset the incomes array for new ..
+
+ chart_income.length=0;
+	chart_expenses.length=0;
+	chart_savings.length=0;   
+	labels_years.length=0; 
+
+//calculate  for your life expectancy
+var withdraw_rate=parseFloat ( $("#withdrawlRate").val()/100 );
+
+var inflation_rate=parseFloat ( $("#expense_inflation_rate").val()/100 );
+ $("#retirement_withdrawl_rate").text( withdraw_rate*100 + "%" ) ; 
+
+
+for (i = 1 ; i < years+1; i++) { 
+	var ai = {} ;  //define a Income blank object
+    var exp={} ; //define an Expense object
+   //create an Annual Income object
+	ai.i=(i);
+	ai.age=(+i + +currentAge);
+
+	//console.log(i+" < "+work_years);
+	ai.income_earned= ( i <= work_years  ) ? parseInt( $("#income").val()  ) : 0 ;
+ 	ai.income_saved = ( i <= work_years  ) ? $("#income").val()  * parseFloat( $("#income_savings_rate").val()/100 ) : 0 ; 
+  
+	ai.savings= parseFloat( $("#savings").val() ) ; 
+	ai.savings_Int= +$("#savings").val()* parseFloat ( $("#savings_apy").val()/100 );
+	ai.retirement=parseFloat(  $("#retirement").val() )  ; 
+	ai.retirement_Int=  parseInt( $("#retirement").val() ) * parseFloat( $("#retirement_apy").val()/100 ) ;
+	ai.one_time=(ai.age==inheritance_age) ? parseInt( $("#income_inheritance").val() ) : 0 ;
+	ai.rents= parseFloat( $("#income_realestate_rentals").val() ) ;
+	ai.pension=(ai.age>= ssn_year_eligible ) ? parseFloat(  $("#income_pension").val() ) : 0 ;
+		ai.misc= parseFloat( $("#income_misc").val() ) ;
+	ai.ssn= (  ai.age >= ssn_year_eligible ) ? parseFloat( $("#income_ss").val() ) : 0 ;
+
+	//AFTER year 1, add last years gains to this years income, FOR SIMPLICITY of computation interest is compounded 1x a year
+	if (i >= 2)
+	{ 
+		//update the savings information , adjust interest compounding (to daily/monthly) if neecessary.
+    
+		ai.savings= ( incomes[i-2].income_saved + incomes[i-2].savings + incomes[i-2].savings_Int  )  ; 
+		ai.savings_Int=( incomes[i-2].savings * parseFloat ( $("#savings_apy").val()/100 )  ) ; 
+
+		   
+		ai.retirement= (incomes[i-2].retirement + incomes[i-2].retirement_Int)  ; 
+		ai.retirement_Int= incomes[i-2].retirement*parseFloat( $("#retirement_apy").val()/100 );
+	
+		
+		}
+
+  //Now calculate how much to withdraw from savings and retirement accounts AFTER we're RETIRED
+	if (i > work_years) //now we're withdrawing
+			{
+
+		
+			ai.retirement_income=(withdraw_rate*ai.savings) +  (withdraw_rate*ai.retirement  );	
+		  	
+		  	ai.savings = ai.savings-(withdraw_rate*ai.savings); //subtract % from savings 
+
+		  	//TODO: adjust retirement withdraw only after AGE 60 (USA time when no penalty)
+      		ai.retirement= ai.retirement - (withdraw_rate*ai.retirement  ) ; //subract % from retirment investments
+			
+			//console.log(i+" > workyears+2 "+(+work_years+2)+" withdraw:"+withdraw_rate+ " on savings "+ai.savings);
+ 			if ( (+work_years+1)==i )  //Show first and last year how much retirement income we get.
+ 			 $("#retirement_income_start").text(formatUSD(ai.retirement_income));
+			else
+			$("#retirement_income_end").text(formatUSD(ai.retirement_income));	
+
+			$("#retirement_savings_end").text(formatUSD(ai.savings));	
+		
+
+			}
+
+	//annual income - just what I made THIS yer. 
+	ai.total_annual_income =ai.income_earned  +  ai.savings_Int   + ai.retirement_Int + ai.misc+ ai.ssn + ai.rents + ai.pension + ai.one_time ;
+
+	// TOTAL funds Income + exisitngs Savings 
+	ai.total_funds = ai.income_earned +(ai.savings +  ai.savings_Int ) + ( ai.retirement + ai.retirement_Int) + ai.misc + ai.ssn + ai.rents + ai.pension + ai.one_time;
+
+	incomes.push(ai);  //add this object to the incomes array
+	
+	
+  //Lets calculate all expenses.
+    //Simple Tax bracket calculation - adjusted each year
+    exp.i=(i);
+    var tax_rate=income_tax_bracket(ai.total_annual_income );
+    $("#expense_tax_income").val( (tax_rate * ai.total_annual_income).toFixed(2)  );
+     exp.tax_bracket= tax_rate;
+    exp.income_tax= parseFloat( $("#expense_tax_income").val() );
+    exp.healthcare = parseFloat( $("#expense_healthcare").val() ) 
+
+    //how long to counts your  mortgage
+    house_term=parseInt($("#expense_house_term").val() );
+    exp.housing=(i < house_term ) ? parseInt( $("#expense_house").val() ): 0  ;
+    exp.property_tax= parseInt($("#expense_house_tax").val() );
+   
+    //how many years kids are your dependants  for how long -  use an average for multiple ages
+    dependants_years=parseInt( $("#expense_kids_term").val()  );
+    exp.dependants=(i < dependants_years ) ? $("#expense_kids").val() * expense_kids_assumption  : 0 ;
+
+    exp.food=parseInt( $("#expense_food").val()  );
+    exp.utilities=parseInt( $("#expense_utilities").val()  );
+    exp.transport=parseInt( $("#expense_transport").val()  );
+    exp.optional=parseInt( $("#expense_misc").val()  );
+     
+    exp.inflation_rate= inflation_rate;
+
+    exp.total_annual_expenses= (exp.income_tax +  exp.healthcare + exp.housing + exp.property_tax +  exp.dependants + exp.food +  exp.utilities + exp.transport +  exp.optional) ;
+
+    //Now add  PROJECTED INFLATION rate to annual expenses
+     exp.total_annual_expenses= exp.total_annual_expenses + ( inflation_rate *  exp.total_annual_expenses   );
+
+      exp.inflation_costs=  ( inflation_rate *  exp.total_annual_expenses   );
+
+	expenses.push(exp);  //add this object to the incomes array
+
+	// Now calculate SURPLUS OR DEFICIT for the year
+	var diff=(incomes[i-1].total_annual_income.toFixed(2) - expenses[i-1].total_annual_expenses.toFixed(2) );
+	// any money left over place in savings for that year.
+          if ( i > 1 )
+          incomes[i-1].savings =( incomes[i-1].savings + diff );
+ 
+       //load the chart data variables
+ 	   chart_income.push(incomes[i-1].total_annual_income);
+		chart_expenses.push(expenses[i-1].total_annual_expenses);
+		chart_savings.push(incomes[i-1].savings);
+		labels_years.push(ai.age);  
+
+}  //end of years loop
+ 
+console.log("=====ANNUAL INCOMES ==============");
+incomes.forEach(function(obj) {
+            console.log(JSON.stringify(obj));
+        });
+
+console.log("=====ANNUAL EXPENSES ==============");
+expenses.forEach(function(obj) {
+            console.log(JSON.stringify(obj));
+             n= ( obj.i - 1 );
+         
+            var diff=(incomes[n].total_annual_income.toFixed(2) - expenses[n].total_annual_expenses.toFixed(2) );
+           console.log ("Annual Income: "+incomes[n].total_annual_income.toFixed(2) +" -  "+expenses[n].total_annual_expenses.toFixed(2) +" Expenses  =   "+diff.toFixed(2));
+
+           
+        });
+
+	//Updatge the Chart
+	plotChart();
+
+ //Forms Changed lets Save The values in local storage
+ // SaveForm() ;
+}
+
+function plotChart()
+{
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+     type: 'line',
+		//type: 'bar',
+	
+    // The data for our dataset
+    data: {
+        labels: labels_years,
+        datasets: [
+					{
+            label: 'Income',
+            backgroundColor: '#A5DFDF',
+            borderColor:  '#A5DFDF',
+            data:chart_income,
+						fill: "+1"        },
+				{
+            label: 'Expense',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: chart_expenses,
+						fill: 'origin'         },
+				{
+            label: 'Savings',
+            backgroundColor: '#FFE6AA',
+            borderColor: '#FFE6AA',
+            data: chart_savings ,
+						fill: 'start'       }
+				
+				]
+    },
+				options: {
+					responsive: true,
+					legend: {
+						position: 'top',
+					},
+					title: {
+						display: true,
+						text: 'MyFire Progression Chart'
+					}
+				}
+});  //end of chart
+
+}
+</script>
+
+</body>
+</html>
