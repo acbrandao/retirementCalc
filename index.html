@@ -386,7 +386,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">Calculate and SAVE </div>
   <div class="panel-body">
- <button class="btn btn-primary" type="button">Calculate</button>
+ <button class="btn btn-primary" type="button" onClick="notify('Calculted')">Calculate</button>
     <button class="btn btn-primary" type="button" onClick="SaveForm(); console.log('Form Saved') " >SAVE Locally</button>
     <button class="btn  btn-primary" type="reset" onClick="localStorage.clear(); console.log('localstorage Cleared') " > Reset Defaults </button>
 
@@ -422,6 +422,16 @@
 	var labels_years=[]; 
 
 	var tax_bracket_pct=0;
+
+
+/** Simple JQuery notification for 
+*
+*/
+function notify(msg)
+{
+	var newDiv = $('div').css({position: 'absolute', left: '100px', top: '100px'}).text(msg).appendTo($('body'));
+newDiv.fadeOut(5000);
+}
 
 /**
  * Simple income_tax_bracket(income)
