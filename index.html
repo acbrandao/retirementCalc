@@ -23,7 +23,7 @@
 	<p>
 	Here's myRetirement Early Calculator. That will help perform a simplified but complete
 	 back-of-the-envelope Financialy Independence Retire Early  calculation to see if and when you can implement your FIRE strategies. 
-	  
+	   Naturally any calculator has limitations related to your projections as well as ever changing TAX and ECONOMIC conditions over time. 
 	</p>
    </div>  
  
@@ -31,10 +31,7 @@
 <form  id="FireCalcForm">
 
 <div class="panel panel-default">
-  <div class="panel-heading">General Retirement Assumptions 
-
-	
-	</div>
+  <div class="panel-heading">General Retirement Assumptions <span id='msg'> </span> 	</div>
   <div class="panel-body">
 
   <div class="row">
@@ -90,9 +87,7 @@
 			 <h3>  <label for="myinput" id="yearsRemain">...</label> Years Remain  </h3> 
 		 
 			 <p>Your life expectancy used to calculate how long to  make your money last.
-		    <h3>At <label  id="retirement_withdrawl_rate">...</label> withdrawl rate, when your're first retired, you can  expect to generate <label  id="retirement_income_start">...</label> annually, and this will change to <label  id="retirement_income_end">...</label> per year, towards the end. Projected nest-egg at the end of your life  <label  id="retirement_savings_end">...</label> </h3>  calculated from your savings and retirment investments. Note substantial inheritance/sales,interest rates, and raising children will all have impacts. Please  virtually impossibel to model exact details as much of your input is projections as
-		TAX and ECONOMIC conditions are complex and change over time.  
-		In a nutshell let this be a broad gauge to see if FIRE may work for your </p>
+		    <h3>At <label  id="retirement_withdrawl_rate">...</label> withdrawl rate, when your're first retired, you can  expect to generate <label  id="retirement_income_start">...</label> annually, and this will change to <label  id="retirement_income_end">...</label> per year, towards the end. Projected nest-egg at the end of your life  <label  id="retirement_savings_end">...</label> </h3>  calculated from your savings and retirment investments. Note substantial inheritance/sales,interest rates, and raising children will all have impacts.In a nutshell let this be a broad gauge to see if FIRE may work for your </p>
 	
 			</div>
 	 </div>
@@ -384,11 +379,11 @@
  
 
 <div class="panel panel-default">
-  <div class="panel-heading">Calculate and SAVE </div>
+  <div class="panel-heading">Calculate and Store</div>
   <div class="panel-body">
  <button class="btn btn-primary" type="button" onClick="notify('Calculated..')">Calculate</button>
-    <button class="btn btn-primary" type="button" onClick="SaveForm(); console.log('Form Saved') " >SAVE Locally</button>
-    <button class="btn  btn-primary" type="reset" onClick="localStorage.clear(); console.log('localstorage Cleared') " > Reset Defaults </button>
+    <button class="btn btn-primary" type="button" onClick="SaveForm(); notify('Form Saved') " >SAVE Locally</button>
+    <button class="btn  btn-primary" type="reset" onClick="localStorage.clear(); notify('localstorage Cleared') " > Reset Defaults </button>
 
   </div>
 </div>
@@ -430,6 +425,8 @@
 function notify(msg)
 {
   $("html, body").animate({scrollTop: 0}, 1000);
+  $("#msg").text(msg);
+  console.log(msg);
 }
 
 /**
