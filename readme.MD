@@ -136,9 +136,16 @@ Right now I simply send to the console.log a year-by-year summary of the income 
 
   *   Download and open **index.html** in your web browser.
 
-## Contributing
+
+## Contributing & Future enhancements  (possible)
 
 If you're interested in updating this script or have some ideas feel free to get in touch. Use Github to report issues and suggest enhancements.
+
+ If there's enough interest, here are some ideas that would make this calculator a bit more full featured.
+
+  * ability to download CSV (or excel compatible) data file of year by year projections calculations
+  * ability to save link with associated data and share with others. Like sending your financial planner a link to your data, right now because all data is save locally this is not possible.
+  * More time event fields for more granular calculations of certain events.
 
 ## Versioning
 
