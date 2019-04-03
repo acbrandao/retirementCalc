@@ -11,15 +11,16 @@
 
 ## Getting Started
 
-Clone this repo .. or just download the source code to the index.html file. All the calculation logic is located there.. 
+Clone this repo .. or just download the source code to the **index.html** file. All the calculation logic is located there.. 
 
   * this repository, mainly the **index.html** file 
   * knowledge of HTML5, very basic understanding Jquery and some understanding of Bootstrap CSS/HTML
 
 ## Dependencies 
 
-This is a single web-page calculator with minimal dependencies. All the calculation code is contained in the index.html file.
+This is a single web-page calculator with minimal dependencies. All the calculation code is contained in the **index.html** file.
 All the depedencies are supplied via links to CDN . 
+
 The following links are required
   * [BootStrap](https://getbootstrap.com/) · The most popular HTML, CSS, and JS library in the world . 
   * [Jquery](https://jquery.com/). jQuery is a fast, small, and feature-rich JavaScript library. 
@@ -31,7 +32,7 @@ Inside the <head> tag
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 ```
 
-Then the corresponding JQuery and ChartJS links 
+Then the corresponding JQuery and ChartJS links be sure to reference Jquery library 
 
 ```javascript
 
