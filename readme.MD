@@ -1,7 +1,7 @@
  
 # my Retirement calculator in JQuery and Bootstrap
 
-I decided to create a modern, easy to use and practical on-line retirement calculator, and I open-sourced it too!  This  retirement calculator comes from the FIRE ( Financially Independent Retire Early) perspective , where you're goal is to save as much as possible , then after a certain number of years, you can retire and live off your savings and investments.  I tried to take into account all the major factors affecting your earning and retirement years, incomes, savings, retirement, kids, housing, healthcare, taxes , inflation etc..
+![](images/myRetirmentCalculatorScreen.png?raw=true) I decided to create a modern, easy to use and practical on-line retirement calculator, and I open-sourced it too!  This  retirement calculator comes from the FIRE ( Financially Independent Retire Early) perspective , where you're goal is to save as much as possible , then after a certain number of years, you can retire and live off your savings and investments.  I tried to take into account all the major factors affecting your earning and retirement years, incomes, savings, retirement, kids, housing, healthcare, taxes , inflation etc..
 
 Complete detailed description here: http://www.abrandao.com/2019/04/retirement-calculator/
 
