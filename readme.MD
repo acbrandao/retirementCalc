@@ -16,6 +16,13 @@ Clone this repo .. or just download the source code to the **index.html** file. 
   * this repository, mainly the **index.html** file 
   * knowledge of HTML5, very basic understanding Jquery and some understanding of Bootstrap CSS/HTML
 
+## Why Jquery??
+This calculator runs entirely in your’re web browser, its uses the following web technologies. Keeping it simple , yet at the same time modern looking and attractive.
+
+  I choose to keep the technologies as  simple as possible. I’m aware some techies and web developers may pooh-pooh these simplistic technologies, and why didn’t I write this in Angular or React or VueJs (btw I would have chosen [VUE.js](Vuejs.org) ) ?, but my rationale was that because I wanted to make this as accessible and easily modifiable by other folks, I wanted to give the broadest possible access to anyone , even those who aren’t super-technical can just go to my Github clone the page, and begin making edits to the calculation model easy-peasy..
+
+I also used external CDN links to the above supporting libraries, and keep the entire code in one index.html page, again trying to keep everything self-contained and compact. See details below.
+
 ## Dependencies 
 
 This is a single web-page calculator with minimal dependencies. All the calculation code is contained in the **index.html** file.
