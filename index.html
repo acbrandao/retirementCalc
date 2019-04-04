@@ -455,17 +455,19 @@ function notify(msg)
  */
 function income_tax_bracket(val )
 {
-  if (0 < val && val  < 19400  )
+	tax_bracket_pct=null;
+
+	if (val>= 0  && val  <=19400  )
 		tax_bracket_pct=0.10
-else if ( 19401 < val && val  < 78950 )
+  else if (val>= 19401  && val  <=78950  )
 	tax_bracket_pct=0.12
-else if ( 78951 < val && val  < 168400 )
+  else if ( val>= 78951  && val  <= 168400 )
 	tax_bracket_pct=0.22
-else if ( 168401< val && val  < 321450 )
+else if (val>=  168401 && val  <= 321450 )
 	tax_bracket_pct=0.24
-else if ( 321451 < val && val  < 408200 )
+else if (val>=  321451  && val  <= 408200 )
 	tax_bracket_pct=0.32
-else if ( 408201 < val && val  < 612350 )
+else if (val>=  408201 && val  <= 612350 )
 	tax_bracket_pct=0.35
 else
 	tax_bracket_pct=0.37;
@@ -656,7 +658,7 @@ for (i = 1 ; i < years+1; i++) {
 
 	//annual income - just what I made THIS yer. 
 	ai.total_annual_income =ai.income_earned  +  ai.savings_Int   + ai.retirement_Int + ai.misc+ ai.ssn + ai.rents + ai.pension + ai.one_time ;
-
+  console.log("total annual Income: "+ ai.total_annual_income );
 	// TOTAL funds Income + exisitngs Savings 
 	ai.total_funds = ai.income_earned +(ai.savings +  ai.savings_Int ) + ( ai.retirement + ai.retirement_Int) + ai.misc + ai.ssn + ai.rents + ai.pension + ai.one_time;
 
