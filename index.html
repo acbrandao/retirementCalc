@@ -481,6 +481,7 @@ else
  */
 function formatUSD(val)
 {
+	console.log("Formating USD: "+val);
 	return "$"+(val).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');  // 12,345.67
 };
 
