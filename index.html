@@ -48,7 +48,7 @@
 		<input type="number" class="form-control" id="lifeExpect"  value="90" placeholder="Age in Years">
 		</div>
 		</div>
-		<div class="col-sm-2">
+		<div class="col-sm-3">
 		<label for="myinput">Family (dependants)</label>
 				<select class="form-control" id="expense_kids">
 					<option selected>Choose...</option>
@@ -64,7 +64,7 @@
 			</div>
 
 
-   	<div class="col-sm-3">
+   	<div class="col-sm-2">
 			<div class="form-group">
 			<label for="myinput">I want to Retire in (years) at Age <span id="retire_age"> </span> </label>
 			<input type="number" id="work_years" class="form-control" placeholder="Years left to work"  value="10" min="0" max="100" onInput="work_years_slider.value=work_years.value" />
@@ -292,13 +292,13 @@
 			<div class="col-sm-3">
 			<div class="form-group">
 			<label for="myinput">Housing Costs Annual</label>
-			<input type="number" class="form-control" id="expense_house" value="18000" placeholder="Mortage or Rent">
+			<input type="number" class="form-control" id="expense_house" value="20000" placeholder="Mortage or Rent">
 			<small> Housing costs mortgage or rent for primary residence (Exclude taxes) </small>
 			</div>
 		</div>
 			<div class="col-sm-3">  
 			<div class="form-group">
-			<label for="myinput">Housing Note - Term (Years)</label>
+			<label for="myinput">Housing Mortgage - Term (Years)</label>
 			<input type="number" class="form-control" id="expense_house_term" value="15" placeholder="Years left on mortgage">
 			<small> Applies mostly to homeowners with  mortgages; how many years till paid in full, Renters continue to pay rent lifetime </small>
 		</div>
@@ -318,17 +318,17 @@
 
 			<div class="row">
 			
-				<div class="col-sm-2">  
+				<div class="col-sm-3">  
 				<div class="form-group">
 				<label for="myinput"><span id="expense_kids_count" class="kiddies"> </span> dependants, support (years) </label>
 				<input type="number" class="form-control" id="expense_kids_term" value="17" placeholder="Dependant Years"> 
-				<small> Length of time dependants will be supported by you. For different ages use average of remaining years.</small>
+				<small> Length of time dependants will be supported by you. For different ages  average of remaining years.</small>
 				</div>
 				</div>
 
-				<div class="col-sm-4">  
+				<div class="col-sm-3">  
 					<div class="form-group">
-					<label for="myinput">Debt </label>
+					<label for="myinput">outstanding Debt</label>
 					<input type="number" class="form-control" id="expense_debt" value="0" placeholder="Your current debt"> 
 					<small> Outstanding debt. Combine any student loans, auto loans, home equity loans (except mortgages) .</small>
 					</div>
