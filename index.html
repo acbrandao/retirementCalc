@@ -482,6 +482,7 @@ else
 function formatUSD(val)
 {
 	console.log("Formating USD: "+val);
+	val= isNaN(parseFloat(val)) : 0: val;  //check for invalid values
 	return "$"+(val).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');  // 12,345.67
 };
 
@@ -567,6 +568,7 @@ var  income_realestate_rentals_income= $("#income_realestate_rentals").val() ;
  var expense_kids_assumption = 13741; //annual cost to raise a child
  //source: http://money.com/money/4629700/child-raising-cost-department-of-agriculture-report/
  var  expense_kids_total= $("#expense_kids").val() * $("#expense_kids_term").val() * expense_kids_assumption ;
+ 
  $("#expense_kids_total").text(  formatUSD(expense_kids_total) );
  $(".kiddies").text( $("#expense_kids").val() )
 
