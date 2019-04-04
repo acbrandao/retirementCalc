@@ -692,7 +692,7 @@ for (i = 1 ; i < years+1; i++) {
 
 		exp.debt=parseInt( $("#expense_debt").val()  );
 		exp.debt_payoff_years=parseInt( $("#expense_debt_payoff_years").val()  );
-		exp.debt_annual=(exp.debt_payoff_years < i)?(exp.debt / exp.debt_payoff_years ):0;  //divide initial debt by payoff in years
+		exp.debt_annual=(exp.debt_payoff_years < i && exp.debt > 0) ? (exp.debt / exp.debt_payoff_years ):0;  //divide initial debt by payoff in years
 
     exp.inflation_rate= inflation_rate;
 
@@ -701,7 +701,7 @@ for (i = 1 ; i < years+1; i++) {
     //Now add  PROJECTED INFLATION rate to annual expenses
      exp.total_annual_expenses= exp.total_annual_expenses + ( inflation_rate *  exp.total_annual_expenses   );
 
-      exp.inflation_costs=  ( inflation_rate *  exp.total_annual_expenses   );
+    exp.inflation_costs=  ( inflation_rate *  exp.total_annual_expenses   );
 
 	expenses.push(exp);  //add this object to the incomes array
 
