@@ -162,7 +162,7 @@
 	</div>
     <div class="col-sm-3">  
 		<div class="form-group">
-		<label for="myinput">Retirment  APY (Avg.)</label>
+		<label for="myinput">Retirement APY (Avg.)</label>
 		<input type="number" class="form-control" id="retirement_apy" value="5" placeholder="% Expected rate of return ">
 		</div>
 		</div>
@@ -180,7 +180,9 @@
 		<div class="form-group">
 		<label for="myinput">Inheritance / Sale (one time)</label>
 		<input type="number" class="form-control" id="income_inheritance" value="0" placeholder="Inheritance lump sum">
-		<small> Income from a one-time lump sum inheritance / home sale / business sale </small>
+		<small> Income from a one-time lump sum inheritance / home sale / business sale 
+		<input class="form-check-input" type="checkbox" value="1" id="tax_exempt" checked > Tax Exempt
+		</small>
 		</div>
 	</div>
 
@@ -659,6 +661,11 @@ for (i = 1 ; i < years+1; i++) {
 	//annual income - just what I made THIS yer. 
 	ai.total_annual_income =ai.income_earned  +  ai.savings_Int   + ai.retirement_Int + ai.misc+ ai.ssn + ai.rents + ai.pension + ai.one_time ;
 
+	if ( $('input.tax_exempt').is(':checked') ) //is inheritance or sale TAX exempt?
+	  ai.total_annual_income_taxable=ai.total_annual_income - ai.one_time;
+	else
+	  ai.total_annual_income_taxable=ai.total_annual_income ; 
+
 	// TOTAL funds Income + exisitngs Savings 
 	ai.total_funds = ai.income_earned +(ai.savings +  ai.savings_Int ) + ( ai.retirement + ai.retirement_Int) + ai.misc + ai.ssn + ai.rents + ai.pension + ai.one_time;
 
@@ -668,9 +675,9 @@ for (i = 1 ; i < years+1; i++) {
   //Lets calculate all expenses.
     //Simple Tax bracket calculation - adjusted each year
     exp.i=(i);
-    var tax_rate=income_tax_bracket(ai.total_annual_income );
- //   console.log("tax rate:"+ tax_rate + " total income:"+ai.total_annual_income)
-		$("#expense_tax_income").val( (tax_rate * ai.total_annual_income).toFixed(2)  );
+    var tax_rate=income_tax_bracket(ai.total_annual_income_taxable );
+ //   console.log("tax rate:"+ tax_rate + " total income:"+ai.total_annual_income_taxable)
+     $("#expense_tax_income").val( (tax_rate * ai.total_annual_income_taxable).toFixed(2)  );
      exp.tax_bracket= tax_rate;
 
     exp.income_tax= parseFloat( $("#expense_tax_income").val() );
