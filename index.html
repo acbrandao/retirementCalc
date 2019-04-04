@@ -667,8 +667,10 @@ for (i = 1 ; i < years+1; i++) {
     //Simple Tax bracket calculation - adjusted each year
     exp.i=(i);
     var tax_rate=income_tax_bracket(ai.total_annual_income );
-    $("#expense_tax_income").val( (tax_rate * ai.total_annual_income).toFixed(2)  );
+    console.log("tax rate:"+ tax_rate + " total income:"+ai.total_annual_income)
+		$("#expense_tax_income").val( (tax_rate * ai.total_annual_income).toFixed(2)  );
      exp.tax_bracket= tax_rate;
+
     exp.income_tax= parseFloat( $("#expense_tax_income").val() );
     exp.healthcare = parseFloat( $("#expense_healthcare").val() ) 
 
