@@ -482,7 +482,7 @@ else
 function formatUSD(val)
 {
 	console.log("Formating USD: "+val);
-	val= isNaN(parseFloat(val)) : 0: val;  //check for invalid values
+	val= isNaN(parseFloat(val)) ? 0: val;  //check for invalid values
 	return "$"+(val).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');  // 12,345.67
 };
 
