@@ -692,7 +692,9 @@ for (i = 1 ; i < years+1; i++) {
 
 		exp.debt=parseInt( $("#expense_debt").val()  );
 		exp.debt_payoff_years=parseInt( $("#expense_debt_payoff_years").val()  );
-		exp.debt_annual=(exp.debt_payoff_years < i && exp.debt > 0) ? (exp.debt / exp.debt_payoff_years ):0;  //divide initial debt by payoff in years
+		if (isNan(exp.debt_payoff_years) )
+			exp.debt_payoff_years=0;
+		exp.debt_annual=(exp.debt_payoff_years < i && exp.debt > 0 && 	exp.debt_payoff_years > 0 ) ? (exp.debt / exp.debt_payoff_years ):0;  //divide initial debt by payoff in years
 
     exp.inflation_rate= inflation_rate;
 
