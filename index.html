@@ -171,7 +171,7 @@
   
 <div class="col-sm-4">	  <h4>
       Retirement income $<label for="myinput" id="retirement_interest_income">...</label>  per year
-    </h4> 	<small> You're total amount of Retirement and  interest income based on APY rage </small>  </div>
+    </h4> 	<small> You're total amount of Retirement plus interest income based on APY range </small>  </div>
 
   </div> <!-- row -->
 
@@ -225,7 +225,7 @@
      		<div class="form-group">
 		<label for="myinput">Social Security Annual</label>
 		<input type="number" class="form-control" id="income_ss" value="16141" placeholder="Annual  Social security">
-		<small> What you're projected Social Security payout will be when you are eligible </small>
+		<small> Projected Social Security payout will be when you are eligible </small>
 		
 		</div>
       </div>
@@ -237,7 +237,7 @@
 		Eligible age SS / Pension</label>  
 
 		<input type="number" class="form-control" id="age_ssn_eligible" value="67" placeholder="Age I will take SS"> 
-		<small>Age when you expect to receive social security /Pension (Applies to US) </small>
+		<small>Age when you expect to receive social security/Pension (Applies to US) </small>
 		</div>
 	</div>
   </div> <!-- row -->
@@ -276,7 +276,7 @@
 						<div class="form-group">
 						<label for="myinput">Healthcare ( Household) </label>
 						<input type="number" class="form-control" id="expense_healthcare" value="4358" placeholder="Healthcare costs">
-						<small>HealthCare Insurance, Out of Pocket, Medical expenses (Source:<a href='https://www.cnbc.com/2017/06/23/heres-how-much-the-average-american-spends-on-health-care.html'>CNBC</a>  )</small>
+						<small>Healthcare Insurance, Out of Pocket, Medical expenses (Source:<a href='https://www.cnbc.com/2017/06/23/heres-how-much-the-average-american-spends-on-health-care.html'>CNBC</a>  )</small>
 						</div>
 					</div>	
 
@@ -330,7 +330,7 @@
 
 				<div class="col-sm-3">  
 					<div class="form-group">
-					<label for="myinput">outstanding Debt</label>
+					<label for="myinput">Debt</label>
 					<input type="number" class="form-control" id="expense_debt" value="0" placeholder="Your current debt"> 
 					<small> Outstanding debt. Combine any student loans, auto loans, home equity loans (except mortgages) .</small>
 					</div>
@@ -361,7 +361,7 @@
 			<div class="form-group">
 			<label for="myinput">Food Annual</label>
 			<input type="number" class="form-control" id="expense_food" value="4500" placeholder="Cost of Food for a year">
-			<small> Cost of food for a year for household (<a href="https://www.cnpp.usda.gov/USDAFoodPlansCostofFood/reports">Source: USDA </a>)</small>
+			<small> Cost of food for a year per household (<a href="https://www.cnpp.usda.gov/USDAFoodPlansCostofFood/reports">Source: USDA </a>)</small>
 			</div>
 		</div>
 			<div class="col-sm-3">  
@@ -384,16 +384,16 @@
 
 		<div class="col-sm-3">
 				<div class="form-group">
-				<label for="myinput">Annual Discretionary</label>
+				<label for="myinput">Annual Discretionary / Charity</label>
 				<input type="number" class="form-control" id="expense_misc" value="0" placeholder="Cost of Vacation">
-				<small> Cost of Vacations,Travel,Entertainment, large purchases etc. </small>
+				<small> Cost of Vacations,Travel,Entertainment,Charities,large purchases etc. </small>
 				</div>			
 		</div>
 		
 		</div> <!-- row -->
 
 	</div>  <!-- end panel body-->
-	<div class="panel-footer">Annual Expenses Total:</div>
+	<div class="panel-footer"> </div>
 </div>
  
 
@@ -546,10 +546,6 @@ var retire_age =  parseInt( currentAge ) + parseInt( $("#work_years").val()  ) +
  $("#yearsRemain").text(years);
  $("#work_years_slider").attr('max', years) ;  //set the Retire age max to remaining lifetime
  $("#retire_age").text( retire_age );
- 
- //Housing Costs Term 
-// $("#expense_house_term").val(years);
-
 
  //Income 
  var income_saved=  $("#income").val() *  $("#income_savings_rate").val() /100 ;
@@ -576,8 +572,7 @@ var  income_realestate_rentals_income= $("#income_realestate_rentals").val() ;
  $("#expense_kids_total").text(  formatUSD(expense_kids_total) );
  $(".kiddies").text( $("#expense_kids").val() )
 
- 
-  //Model Let's begin creating a year by YEARLY array of incomes and expenses
+  //Projection Model Let's begin creating a year by YEARLY array of incomes and expenses
 
   var i;
 
