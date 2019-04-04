@@ -661,10 +661,10 @@ for (i = 1 ; i < years+1; i++) {
 	//annual income - just what I made THIS yer. 
 	ai.total_annual_income =ai.income_earned  +  ai.savings_Int   + ai.retirement_Int + ai.misc+ ai.ssn + ai.rents + ai.pension + ai.one_time ;
 
-	if ( $('input.tax_exempt').is(':checked') ) //is inheritance or sale TAX exempt?
-	  ai.total_annual_income_taxable=ai.total_annual_income - ai.one_time;
+	if ( $("#tax_exempt").is(':checked')  ) //is inheritance or sale TAX exempt?
+	  ai.total_annual_income_taxable=ai.total_annual_income - ai.one_time;  //remove the inheirtance from taxable income
 	else
-	  ai.total_annual_income_taxable=ai.total_annual_income ; 
+	  ai.total_annual_income_taxable=ai.total_annual_income ;  //leave it in..
 
 	// TOTAL funds Income + exisitngs Savings 
 	ai.total_funds = ai.income_earned +(ai.savings +  ai.savings_Int ) + ( ai.retirement + ai.retirement_Int) + ai.misc + ai.ssn + ai.rents + ai.pension + ai.one_time;
