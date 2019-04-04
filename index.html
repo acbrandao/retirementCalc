@@ -483,7 +483,7 @@ else
  */
 function formatUSD(val)
 {
-	console.log("Formating USD: "+val);
+//	console.log("Formating USD: "+val);
 	val= isNaN(parseFloat(val)) ? 0: val;  //check for invalid values
 	return "$"+(val).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');  // 12,345.67
 };
@@ -658,7 +658,7 @@ for (i = 1 ; i < years+1; i++) {
 
 	//annual income - just what I made THIS yer. 
 	ai.total_annual_income =ai.income_earned  +  ai.savings_Int   + ai.retirement_Int + ai.misc+ ai.ssn + ai.rents + ai.pension + ai.one_time ;
-  console.log("total annual Income: "+ ai.total_annual_income );
+
 	// TOTAL funds Income + exisitngs Savings 
 	ai.total_funds = ai.income_earned +(ai.savings +  ai.savings_Int ) + ( ai.retirement + ai.retirement_Int) + ai.misc + ai.ssn + ai.rents + ai.pension + ai.one_time;
 
@@ -669,7 +669,7 @@ for (i = 1 ; i < years+1; i++) {
     //Simple Tax bracket calculation - adjusted each year
     exp.i=(i);
     var tax_rate=income_tax_bracket(ai.total_annual_income );
-    console.log("tax rate:"+ tax_rate + " total income:"+ai.total_annual_income)
+ //   console.log("tax rate:"+ tax_rate + " total income:"+ai.total_annual_income)
 		$("#expense_tax_income").val( (tax_rate * ai.total_annual_income).toFixed(2)  );
      exp.tax_bracket= tax_rate;
 
