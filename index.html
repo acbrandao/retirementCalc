@@ -22,8 +22,9 @@
   <h2><b>my</b>Retirement Calculator </h2>
 	<p>
 	Here's myRetirement Early Calculator. That will help perform a simplified but complete
-	 back-of-the-envelope Financialy Independence Retire Early  calculation to see if and when you can implement your FIRE strategies. 
-	   Naturally any calculator has limitations related to your projections as well as ever changing TAX and ECONOMIC conditions over time. 
+	 back-of-the-envelope Financialy Independence Retire Early  calculation to see if and when you can implement your 
+	 FIRE strategies. 	   Naturally any calculator has limitations related to your projections as well as ever 
+	 changing TAX and ECONOMIC conditions over time. 
 	</p>
    </div>  
  
@@ -317,15 +318,31 @@
 
 			<div class="row">
 			
-				<div class="col-sm-5">  
+				<div class="col-sm-2">  
 				<div class="form-group">
 				<label for="myinput"><span id="expense_kids_count" class="kiddies"> </span> dependants , will live with you for: </label>
 				<input type="number" class="form-control" id="expense_kids_term" value="17" placeholder="Dependant Years"> years
 				<small> Length of time dependants will be supported by you. For different ages use average of remaining years.</small>
 				</div>
 				</div>
+
+				<div class="col-sm-3">  
+					<div class="form-group">
+					<label for="myinput">Debt </label>
+					<input type="number" class="form-control" id="expense_debt" value="0" placeholder="Your current debt"> 
+					<small> Outstanding debt. Combine any student loans, auto loans, home equity loans (except mortgages) .</small>
+					</div>
+					</div>
+
+					<div class="col-sm-3">  
+						<div class="form-group">
+						<label for="myinput">Debt Payoff Years</label>
+						<input type="number" class="form-control" id="expense_debt_payoff_years" value="0" placeholder="Years to payoff Debt"> years
+						<small>How many years to payoff debt? Will evenly be applied to expenses .</small>
+						</div>
+						</div>
 			
-				<div class="col-sm-6">
+				<div class="col-sm-4">
 						<h4>
 								Cost of raising <label for="myinput" id="expense_kids_count" class="kiddies">...</label> dependants 
 								is about  $<label for="myinput" id="expense_kids_total">...</label> 
@@ -662,10 +679,14 @@ for (i = 1 ; i < years+1; i++) {
     exp.utilities=parseInt( $("#expense_utilities").val()  );
     exp.transport=parseInt( $("#expense_transport").val()  );
     exp.optional=parseInt( $("#expense_misc").val()  );
-     
+
+		exp.debt=parseInt( $("#expense_debt").val()  );
+		exp.debt_payoff_years=parseInt( $("#expense_debt_payoff_years").val()  );
+		exp.debt_annual=(debt_payoff_years < i)?(exp.debt / debt_payoff_years ):0;  //divide initial debt by payoff in years
+
     exp.inflation_rate= inflation_rate;
 
-    exp.total_annual_expenses= (exp.income_tax +  exp.healthcare + exp.housing + exp.property_tax +  exp.dependants + exp.food +  exp.utilities + exp.transport +  exp.optional) ;
+    exp.total_annual_expenses= (exp.income_tax +  exp.healthcare + exp.housing + exp.property_tax +  exp.dependants + exp.food +  exp.utilities + exp.transport +  exp.optional + exp.debt_annual) ;
 
     //Now add  PROJECTED INFLATION rate to annual expenses
      exp.total_annual_expenses= exp.total_annual_expenses + ( inflation_rate *  exp.total_annual_expenses   );
