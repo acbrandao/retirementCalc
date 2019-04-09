@@ -400,14 +400,18 @@
 <div class="panel panel-default">
   <div class="panel-heading">Calculate and Store</div>
   <div class="panel-body">
- <button class="btn btn-primary" type="button" onClick="notify('Calculated..')">Calculate</button>
+ <button class="btn btn-primary" type="button" onClick="SaveForm(); notify('Calculated..')">Calculate</button>
     <button class="btn btn-primary" type="button" onClick="SaveForm(); notify('Form Saved') " >SAVE Locally</button>
     <button class="btn  btn-primary" type="reset" onClick="localStorage.clear(); notify('Defaults Reset and LocalStorage Cleared') " > Reset Defaults </button>
-
-  </div>
+    <button class="btn btn-secondary" type="button" onClick="DownLoadJSON()"> Download </button> 
+ </div>
 </div>
- 
+
 </form>
+
+<!-- Hidden DIV for JSON DOWNLOAD Option -->
+<a id="downloadJsonDIV" style="display:none"></a>
+
 <!-- End of FIRE FORM -->
 <hr>
 <small>This is open source, and for any other folks interested  out there I have linked this <A href='https://github.com/acbrandao/retirementCalc'>source code on GitHub</a>, if you wish to modify the <a href="https://github.com/acbrandao/retirementCalc/issues">basic assumptions</a> or just mess with this calculator.</small> </p>
@@ -439,6 +443,21 @@
 	var labels_years=[]; 
 
 	var tax_bracket_pct=0;
+
+
+/** DownLoadJSON function converts INCOME/EXPENSE JSON into Downloadable format
+*
+*/
+
+function DownLoadJSON()
+{
+
+var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(incomes));
+var dlAnchorElem = document.getElementById('downloadJsonDIV');
+dlAnchorElem.setAttribute("href",     dataStr     );
+dlAnchorElem.setAttribute("download", "incomes_by_year.json");
+dlAnchorElem.click();
+}
 
 
 /** Simple JQuery notification for 
@@ -582,7 +601,7 @@ var inheritance_age=$("#income_inheritance_age").val(); // age when you project 
 incomes= []; //reset the incomes array for new 
 expenses= []; //reset the incomes array for new ..
 
- chart_income.length=0;
+ 	chart_income.length=0;
 	chart_expenses.length=0;
 	chart_savings.length=0;   
 	labels_years.length=0; 
@@ -692,13 +711,13 @@ for (i = 1 ; i < years+1; i++) {
     exp.transport=parseInt( $("#expense_transport").val()  );
     exp.optional=parseInt( $("#expense_misc").val()  );
 
-		exp.debt=parseInt( $("#expense_debt").val()  );
-		exp.debt_payoff_years=parseInt( $("#expense_debt_payoff_years").val()  );
-		exp.debt_payoff_years =isNaN(parseFloat(exp.debt_payoff_years)) ? 0: exp.debt_payoff_years ;
-		
-		exp.debt_annual=(i <= exp.debt_payoff_years  && exp.debt > 0 && exp.debt_payoff_years>0 ) ? (exp.debt / exp.debt_payoff_years ):0;  //divide initial debt by payoff in years
+	exp.debt=parseInt( $("#expense_debt").val()  );
+	exp.debt_payoff_years=parseInt( $("#expense_debt_payoff_years").val()  );
+	exp.debt_payoff_years =isNaN(parseFloat(exp.debt_payoff_years)) ? 0: exp.debt_payoff_years ;
+	
+	exp.debt_annual=(i <= exp.debt_payoff_years  && exp.debt > 0 && exp.debt_payoff_years>0 ) ? (exp.debt / exp.debt_payoff_years ):0;  //divide initial debt by payoff in years
 
-    exp.inflation_rate= inflation_rate;
+exp.inflation_rate= inflation_rate;
 
     exp.total_annual_expenses= (exp.income_tax +  exp.healthcare + exp.housing + exp.property_tax +  exp.dependants + exp.food +  exp.utilities + exp.transport +  exp.optional + exp.debt_annual) ;
 
