@@ -402,8 +402,8 @@
   <div class="panel-body">
  <button class="btn btn-primary" type="button" onClick="SaveForm(); notify('Calculated..')">Calculate</button>
     <button class="btn btn-primary" type="button" onClick="SaveForm(); notify('Form Saved') " >SAVE Locally</button>
-    <button class="btn  btn-primary" type="reset" onClick="localStorage.clear(); notify('Defaults Reset and LocalStorage Cleared') " > Reset Defaults </button>
-    <button class="btn btn-secondary" type="button" onClick="DownLoadJSON()"> Download </button> 
+    <button class="btn  btn-primary" type="reset" onClick="localStorage.clear(); notify('Defaults Reset and LocalStorage Cleared') " >Reset Defaults </button>
+    <button class="btn btn btn-info" type="button" onClick="DownLoadJSON()">Download CSV</button> 
  </div>
 </div>
 
@@ -414,7 +414,7 @@
 
 <!-- End of FIRE FORM -->
 <hr>
-<small>This is open source, and for any other folks interested  out there I have linked this <A href='https://github.com/acbrandao/retirementCalc'>source code on GitHub</a>, if you wish to modify the <a href="https://github.com/acbrandao/retirementCalc/issues">basic assumptions</a> or just mess with this calculator.</small> </p>
+<small>This is open source, and for any other folks interested  out there I have linked this <A href='https://github.com/acbrandao/retirementCalc'>source code on GitHub</a>, if you wish to modify the calculator or<a href="https://github.com/acbrandao/retirementCalc/issues">request a feature</a> or just mess with this calculator.</small> </p>
 </div> <!-- container -->
  <!-- Supporting Javascript Libraries like Jquery etc. -->  
 
@@ -452,11 +452,34 @@
 function DownLoadJSON()
 {
 
-var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(incomes));
+var jsonObject = JSON.stringify(incomes);
+
+//var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(incomes));
+dataStr = "data:text/csv;charset=utf-8," + ConvertToCSV(jsonObject) ;
 var dlAnchorElem = document.getElementById('downloadJsonDIV');
 dlAnchorElem.setAttribute("href",     dataStr     );
-dlAnchorElem.setAttribute("download", "incomes_by_year.json");
+dlAnchorElem.setAttribute("download", "incomes_by_year.csv");
 dlAnchorElem.click();
+}
+
+
+ // JSON to CSV Converter
+function ConvertToCSV(objArray) {
+    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+    var str = '';
+
+    for (var i = 0; i < array.length; i++) {
+        var line = '';
+        for (var index in array[i]) {
+            if (line != '') line += ','
+
+            line += array[i][index];
+        }
+
+        str += line + '\r\n';
+    }
+
+    return str;
 }
 
 
